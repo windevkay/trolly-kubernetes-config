@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authservice.deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authservice
+  template:
+    metadata:
+      labels:
+        app: authservice
+    spec:
+      containers:
+        - name: authservice
+          image: kolabayo360/trolly/auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authservice-serv
+spec:
+  selector:
+    app: authservice
+  ports:
+    - name: authservice
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
