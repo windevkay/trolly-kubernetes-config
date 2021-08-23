@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authservice.deployment
+  name: client-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: authservice
+      app: client
   template:
     metadata:
       labels:
-        app: authservice
+        app: client
     spec:
       containers:
-        - name: authservice
-          image: kolabayo360/trollyauth
+        - name: client
+          image: kolabayo360/trollyclient
           resources:
             requests:
               memory: "128Mi"
@@ -22,22 +22,16 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "1000m"
-          env:
-            - name: JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: authservice-serv
+  name: client-serv
 spec:
   selector:
-    app: authservice
+    app: client
   ports:
-    - name: authservice
+    - name: client
       protocol: TCP
       port: 3000
       targetPort: 3000
