@@ -23,6 +23,8 @@ spec:
               memory: "256Mi"
               cpu: "1000m"
           env:
+            - name: MONGO_URI
+              value: "mongodb://tickets-mongo-srv:27017/ticketservicedb"
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
