@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ticketservice.deployment
+  name: ticketservice-deployment
 spec:
   replicas: 1
   selector:
@@ -23,6 +23,14 @@ spec:
               memory: "256Mi"
               cpu: "1000m"
           env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: "http://nats-serv:4222"
+            - name: NATS_CLUSTER_ID
+              value: trolly
             - name: MONGO_URI
               value: "mongodb://tickets-mongo-srv:27017/ticketservicedb"
             - name: JWT_KEY
