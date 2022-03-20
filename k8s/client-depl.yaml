@@ -15,13 +15,6 @@ spec:
       containers:
         - name: client
           image: kolabayo360/trollyclient
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "1000m"
-            limits:
-              memory: "512Mi"
-              cpu: "2000m"
 ---
 apiVersion: v1
 kind: Service
